@@ -33,7 +33,7 @@
 						Login
 					</span>
 
-					<div class="wrap-input100 validate-input m-b-16" data-validate = "Valid username is required: ex@abc.xyz">
+					<div class="wrap-input100 m-b-16">
 						<input class="input100" type="text" name="username" id="username" placeholder="Username">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
@@ -41,7 +41,7 @@
 						</span>
 					</div>
 
-					<div class="wrap-input100 validate-input m-b-16" data-validate = "Password is required">
+					<div class="wrap-input100 m-b-16">
 						<input class="input100" type="password" name="password" id="password" placeholder="Password">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
@@ -62,22 +62,6 @@
 						</button>
 					</div>
 
-					<div class="text-center w-full p-t-42 p-b-22">
-						<span class="txt1">
-							Or login with
-						</span>
-					</div>
-
-					<a href="#" class="btn-face m-b-10">
-						<i class="fa fa-facebook-official"></i>
-						Facebook
-					</a>
-
-					<a href="#" class="btn-google m-b-10">
-						<img src="images/icons/icon-google.png" alt="GOOGLE">
-						Google
-					</a>
-
 					<div class="text-center w-full p-t-115">
 						<span class="txt1">
 							Not a member?
@@ -92,7 +76,6 @@
 		</div>
 	</div>
 	
-	
 
 	
 <!--===============================================================================================-->	
@@ -106,28 +89,30 @@
     <script src="js/main.js"></script>
     
     <script>
-            document.querySelector('#login').addEventListener('click', login);
-            function login(event) {
-                event.preventDefault();
-                const xhttp = new XMLHttpRequest();
-    
-                xhttp.onreadystatechange = function () {
-                    if (this.readyState == 4 && this.status == 200) {
-                       location.href = '/home';
-                    }
-                }
-    
-                let jsonString = {
-                    // "story": "Sandra journeyed to hallway. Daniel journeyed to kitchen.",
-                    "story": 'story',
-                    // "question": "Where is Sandra?"
-                    question: 'question'
-                };
-                xhttp.open('post', `http://localhost:3000/login`, true);
-                xhttp.setRequestHeader("Content-Type", "application/json");
-                xhttp.send(JSON.stringify(jsonString));
-            }
-        </script>
+	document.querySelector('#login').addEventListener('click', login);
+	function login(event) {
+		const xhttp = new XMLHttpRequest();
+
+		xhttp.onreadystatechange = function () {
+			if (this.readyState == 4 && this.status == 200) {
+				console.log(this.responseText);
+				location.href = '/home';
+			}
+		}
+
+		var username = document.getElementById("username");
+		var password = document.getElementById("password");
+
+		let credentials = {
+			username: username.value ,
+			password: password.value
+		};
+		
+		xhttp.open('post', `http://localhost:3000/login`, true);
+		xhttp.setRequestHeader("Content-Type", "application/json");
+		xhttp.send(JSON.stringify(credentials));
+	}
+    </script>
 
 </body>
 </html>

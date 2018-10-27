@@ -37,7 +37,7 @@ app.post('/login', (request, response) => {
     });
 });
 
-app.post('/postWithCsrf', (request, response) => {
+app.post('/submitCardDetails', (request, response) => {
     console.log(JSON.parse(request.cookies.__user).uuid, 'user', JSON.parse(request.cookies.__user).csrf_token);
    if (request.body.csrf_token === JSON.parse(request.cookies.__user).csrf_token) {
     response.send({
